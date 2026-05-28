@@ -1,20 +1,22 @@
 import { StyleSheet, Text, View, Button, TouchableHighlight, TextInput, Pressable, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { useRoute } from "@react-navigation/native";
 import { useState } from "react";
 
 export default function Login(){
     const navigation = useNavigation();
     const [senha, setSenha] = useState("");
     const [email, setEmail] = useState("");
+    const [nome, setNome] = useState("");
 
     const btn = () => {
     if(!email || !senha){
         alert("É necessário todos os dados!")
     }else{
-    if(email !== "admin" || senha !== "1234"){
+    if(email !== "anajmp11@gmail.com" || senha !== "Teste@123"){
         alert("Email ou senha inválidos")
     }else{
-        navigation.navigate("Home")
+        navigation.navigate("Home", {nome: nome})
     }
     }
 }
@@ -34,6 +36,7 @@ export default function Login(){
                 </View>
                 
                 <View style={styles.input}>
+                <TextInput style={styles.textInput} placeholder = 'Nome'  value = {nome} onChangeText={(value) => setNome(value)} />
                 <TextInput style={styles.textInput} placeholder = 'Email' value = {email} onChangeText={(value) => setEmail(value)}/>
                 <TextInput style={styles.textInput} secureTextEntry={true} placeholder = 'Senha' value = {senha} onChangeText={(value) => setSenha(value)} />
                 </View>
@@ -108,9 +111,9 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         height: 200,
         width: "80%",
-        gap: 50,
-        marginTop: -20,
-        marginLeft: 20
+        gap: 20,
+        marginTop: -29,
+        marginLeft: 34
     },
 
     textInput:{
@@ -129,6 +132,7 @@ const styles = StyleSheet.create({
 
     esquecerSenha:{
         fontSize: 15,
+        marginTop: 20
     },
 
     button:{

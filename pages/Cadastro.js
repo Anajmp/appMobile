@@ -7,13 +7,27 @@ export default function Cadastro(){
     const [nome, setNome] = useState("");
     const [senha, setSenha] = useState("");
     const [email, setEmail] = useState("");
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const senhaRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
     const btn = () => {
     if(!email || !senha || !nome){
-        alert("É necessário todos os dados!")
-    }else{
-        return navigation.navigate("Home", {nome: nome})
+        alert("É necessário todos os dados!");
+        return
     }
+    
+    if (!emailRegex.test(email)) {
+        alert("Formato de e-mail inválido");
+        return
+    }
+
+    if (!senhaRegex.test(senha)) {
+        alert("A senha deve ter 8+ caracteres, incluindo maiúscula, minúscula, número e caractere especial.");
+        return
+    }
+    
+    return navigation.navigate("Home", {nome: nome})
+    
 }
 
     return(
